@@ -105,11 +105,9 @@ int main(int argc,char* arg[]){
             }
         }
     }
-    av_packet_unref(av_packet);
     av_packet_free(&av_packet);
     avcodec_free_context(&av_codec_content);
     avformat_close_input(&av_format_context);
-    avformat_free_context(av_format_context);
     av_frame_free(&yuvFrame);
 
 
