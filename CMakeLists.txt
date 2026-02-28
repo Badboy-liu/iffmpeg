@@ -40,6 +40,13 @@ target_link_directories(${PROJECT_NAME}5 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}5 PRIVATE ${FFMPEG_LIBRARIES})
 
 
+add_executable(${PROJECT_NAME}6 05/main.cpp)
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARIES})
+
+
 
 # 添加头文件搜索路径
 #target_include_directories(${PROJECT_NAME} PRIVATE external/include)
