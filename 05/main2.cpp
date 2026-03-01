@@ -8,10 +8,17 @@ using namespace std;
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
+#include <libavutil/imgutils.h>
+#include <libavutil/avutil.h>
+#include <libavfilter/avfilter.h>
+#include "libswresample/swresample.h"
+#include "libswscale/swscale.h"
+
+
 }
 
 int main(int argc,char* arg[]){
-    auto file = fopen("result.yuv","w+b");
+    auto file = fopen("result2.yuv","w+b");
 
     if(file==nullptr)
     {
@@ -29,6 +36,10 @@ int main(int argc,char* arg[]){
     AVCodecParameters *avCodecPara=NULL;
     const AVCodec *av_codec=NULL;
     AVFrame *yuvFrame = av_frame_alloc();
+    AVFrame *nv12Frame = av_frame_alloc();
+
+
+    unsigned char *out_buffer=nullptr;
 
 
     av_format_context = avformat_alloc_context();
@@ -85,9 +96,22 @@ int main(int argc,char* arg[]){
     auto width = av_codec_content->width;
     auto height = av_codec_content->height;
 
+    printf("pix_fmt = %d\n", av_codec_content->pix_fmt);
+
+    struct SwsContext *img_convert_ctx = sws_getContext(
+        av_codec_content->width,av_codec_content->height,av_codec_content->pix_fmt,
+        av_codec_content->width,av_codec_content->height,AV_PIX_FMT_NV12,
+        SWS_BICUBIC,nullptr,nullptr,nullptr);
+
+    int numBytes = av_image_get_buffer_size(AV_PIX_FMT_NV12,av_codec_content->width,av_codec_content->height,1);
+
+    out_buffer = (unsigned char*)av_malloc(numBytes*sizeof(unsigned char));
+
     av_packet = av_packet_alloc();
     av_new_packet(av_packet,av_codec_content->width*av_codec_content->height);
-    printf("pix_fmt = %d\n", av_codec_content->pix_fmt);
+
+    av_image_fill_arrays(nv12Frame->data,nv12Frame->linesize,out_buffer,AV_PIX_FMT_NV12,av_codec_content->width,av_codec_content->height,1);
+
     int frameCount= 0;
     while (av_read_frame(av_format_context,av_packet)>=0)
     {
@@ -95,21 +119,13 @@ int main(int argc,char* arg[]){
         {
             if (avcodec_send_packet(av_codec_content,av_packet)==0)
             {
-                while (avcodec_receive_frame(av_codec_content,yuvFrame)==0)
+                while (avcodec_receive_frame(av_codec_content,yuvFrame)>=0)
                 {
-                    for (int i = 0; i < height; i++) {
-                        fwrite(yuvFrame->data[0] + i * yuvFrame->linesize[0], 1, width, file);
-                    }
+                    sws_scale(img_convert_ctx,(const uint8_t* const*)yuvFrame->data,yuvFrame->linesize,0,height,
+                        nv12Frame->data,nv12Frame->linesize);
 
-
-                    for (int i = 0; i < height / 2; i++) {
-                        fwrite(yuvFrame->data[1] + i * yuvFrame->linesize[1], 1, width / 2, file);
-                    }
-
-
-                    for (int i = 0; i < height / 2; i++) {
-                        fwrite(yuvFrame->data[2] + i * yuvFrame->linesize[2], 1, width / 2, file);
-                    }
+                    fwrite(nv12Frame->data[0],1,width*height,file);
+                    fwrite(nv12Frame->data[1],1,width*height/2,file);
                     printf("save frame %d to file.\n",frameCount++);
                     fflush(file);
                 }

@@ -6,7 +6,9 @@ find_package(FFMPEG   REQUIRED)
 #find_package(PNG REQUIRED)
 message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
 message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp
+
+)
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARIES})
@@ -45,6 +47,12 @@ add_executable(${PROJECT_NAME}6 05/main.cpp)
 target_include_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARIES})
+
+add_executable(${PROJECT_NAME}7 05/main2.cpp)
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}7 PRIVATE ${FFMPEG_LIBRARIES})
 
 
 
