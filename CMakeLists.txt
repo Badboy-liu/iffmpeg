@@ -6,9 +6,7 @@ find_package(FFMPEG   REQUIRED)
 #find_package(PNG REQUIRED)
 message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
 message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
-add_executable(${PROJECT_NAME} main.cpp
-
-)
+add_executable(${PROJECT_NAME} main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARIES})
@@ -54,7 +52,41 @@ target_include_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}7 PRIVATE ${FFMPEG_LIBRARIES})
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+find_package(Qt6 COMPONENTS
+        Core Widgets gui
+        REQUIRED)
 
+add_executable(${PROJECT_NAME}8 06/main.cpp 06/mainwindow.cpp
+        06/mainwindow.h
+        06/ffmpegwidget.cpp
+        06/ffmpegwidget.h)
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}8 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}8 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}8 PRIVATE ${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}8 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        ${FFMPEG_LIBRARIES}
+        swscale
+)
+qt_finalize_executable(${PROJECT_NAME}8)
+
+if (MSVC)
+    add_custom_command(TARGET ${PROJECT_NAME}8 POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory
+            $<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms
+
+            COMMAND ${CMAKE_COMMAND} -E copy
+            #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
+    )
+endif()
 
 # 添加头文件搜索路径
 #target_include_directories(${PROJECT_NAME} PRIVATE external/include)
