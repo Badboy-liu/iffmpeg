@@ -56,7 +56,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 find_package(Qt6 COMPONENTS
-        Core Widgets gui
+        Core Widgets gui    OpenGL
+        OpenGLWidgets
         REQUIRED)
 
 add_executable(${PROJECT_NAME}8 06/main.cpp 06/mainwindow.cpp
@@ -75,6 +76,28 @@ target_link_libraries(${PROJECT_NAME}8 PRIVATE
         swscale
 )
 qt_finalize_executable(${PROJECT_NAME}8)
+
+
+add_executable(${PROJECT_NAME}9 07/main.cpp 07/mainwindow.cpp
+        07/mainwindow.h
+        07/ffmpegdecoder.cpp
+        07/ffmpegdecoder.h
+        07/I420render.cpp
+        07/I420render.h)
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}9 PRIVATE ${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}9 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        ${FFMPEG_LIBRARIES}
+        swscale
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+)
+qt_finalize_executable(${PROJECT_NAME}9)
 
 if (MSVC)
     add_custom_command(TARGET ${PROJECT_NAME}8 POST_BUILD
