@@ -103,6 +103,29 @@ target_link_libraries(${PROJECT_NAME}9 PRIVATE
 )
 qt_finalize_executable(${PROJECT_NAME}9)
 
+add_executable(${PROJECT_NAME}10 08/main.cpp 08/mainwindow.cpp
+        08/mainwindow.h
+        08/ffmpegdecoder.cpp
+        08/ffmpegdecoder.h
+        08/I420render.cpp
+        08/I420render.h
+        08/I420render2.cpp
+        08/I420render2.h)
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}10 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}10 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}10 PRIVATE ${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}10 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        ${FFMPEG_LIBRARIES}
+        swscale
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+)
+qt_finalize_executable(${PROJECT_NAME}10)
+
 if (MSVC)
     add_custom_command(TARGET ${PROJECT_NAME}8 POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E make_directory
