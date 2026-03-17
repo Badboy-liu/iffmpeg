@@ -6,7 +6,9 @@ find_package(FFMPEG   REQUIRED)
 #find_package(PNG REQUIRED)
 message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
 message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp
+        07/I420render2.cpp
+        07/I420render2.h)
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARIES})
@@ -83,7 +85,9 @@ add_executable(${PROJECT_NAME}9 07/main.cpp 07/mainwindow.cpp
         07/ffmpegdecoder.cpp
         07/ffmpegdecoder.h
         07/I420render.cpp
-        07/I420render.h)
+        07/I420render.h
+        07/I420render2.cpp
+        07/I420render2.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_LIBRARY_DIRS})

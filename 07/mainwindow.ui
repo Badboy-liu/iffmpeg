@@ -37,7 +37,7 @@
      </widget>
     </item>
     <item row="2" column="0" colspan="3">
-     <widget class="I420Render" name="openGLWidget"/>
+     <widget class="I420Render2" name="openGLWidget"/>
     </item>
    </layout>
   </widget>
@@ -56,9 +56,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>../07/I420Render</class>
+   <class>../07/I420Render2</class>
    <extends>QOpenGLWidget</extends>
-   <header>../07/I420render.h</header>
+   <header>../07/I420Render2.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
