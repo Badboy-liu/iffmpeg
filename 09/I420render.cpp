@@ -97,23 +97,23 @@ void I420Render::updateTextureInfo(int w, int h)
 {
 
     mTexY ->setSize(w,h);
-    mTexY->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexY->setFormat(QOpenGLTexture::R8_UNorm);
+    mTexY->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexY->setWrapMode(QOpenGLTexture::ClampToEdge);
     mTexY->setMinificationFilter(QOpenGLTexture::Linear);
     mTexY->setMagnificationFilter(QOpenGLTexture::Linear);
 
 
     mTexU ->setSize(w/2,h/2);
-    mTexU->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexU->setFormat(QOpenGLTexture::R8_UNorm);
+    mTexU->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexU->setWrapMode(QOpenGLTexture::ClampToEdge);
     mTexU->setMinificationFilter(QOpenGLTexture::Linear);
     mTexU->setMagnificationFilter(QOpenGLTexture::Linear);
 
     mTexV ->setSize(w/2,h/2);
-    mTexV->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexV->setFormat(QOpenGLTexture::R8_UNorm);
+    mTexV->allocateStorage(QOpenGLTexture::Red,QOpenGLTexture::UInt8);
     mTexV->setWrapMode(QOpenGLTexture::ClampToEdge);
     mTexV->setMinificationFilter(QOpenGLTexture::Linear);
     mTexV->setMagnificationFilter(QOpenGLTexture::Linear);
@@ -147,7 +147,7 @@ void I420Render::updateTextureData(const YUVData& data)
 
 void I420Render::paint()
 {
-    qDebug() << "render frame" << mTextureAlloced;
+    // qDebug() << "render frame" << mTextureAlloced;
 
     //
     // if (!mTextureAlloced )

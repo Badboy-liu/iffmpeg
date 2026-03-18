@@ -168,9 +168,9 @@ void FFmpegDecoder::run()
                     m_yuvData.height = yuvFrame->height;
                     m_yuvData.width = yuvFrame->width;
 
-                    qDebug()<<"m_yuvData.yLineSize"<<m_yuvData.yLineSize;
-                    qDebug()<<"m_yuvData.uLineSize"<<m_yuvData.uLineSize;
-                    qDebug()<<"m_yuvData.vLineSize"<<m_yuvData.vLineSize;
+                    //qDebug()<<"m_yuvData.yLineSize"<<m_yuvData.yLineSize;
+                    //qDebug()<<"m_yuvData.uLineSize"<<m_yuvData.uLineSize;
+                    //qDebug()<<"m_yuvData.vLineSize"<<m_yuvData.vLineSize;
 
 
                     QMutexLocker locker(&m_mutex);

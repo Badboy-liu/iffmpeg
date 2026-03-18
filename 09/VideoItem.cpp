@@ -52,7 +52,7 @@ class VideoFboItem:public QQuickFramebufferObject::Renderer
     void synchronize(QQuickFramebufferObject* item) override
     {
 
-        qDebug() << "sync called";
+        //qDebug() << "sync called";
         VideoItem* p_item = qobject_cast<VideoItem*>(item);
         if (!p_item) return;
 
@@ -86,11 +86,11 @@ class VideoFboItem:public QQuickFramebufferObject::Renderer
             }
 
         }else {
-            qDebug() << "sync called, no YUV frame yet!";
+            //qDebug() << "sync called, no YUV frame yet!";
         }
         if (p_item->infoDirty())
         {
-            qDebug() <<"p_item->infoDirty()";
+            //qDebug() <<"p_item->infoDirty()";
             m_pendingResize = true;
             m_width = p_item->width();
             m_height = p_item->height();
