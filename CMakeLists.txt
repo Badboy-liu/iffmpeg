@@ -58,8 +58,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 find_package(Qt6 COMPONENTS
-        Core Widgets gui    OpenGL
-        OpenGLWidgets
+        Core Widgets Gui    OpenGL Qml  Quick
+        QuickControls2
+        OpenGLWidgets OpenGL
         REQUIRED)
 
 add_executable(${PROJECT_NAME}8 06/main.cpp 06/mainwindow.cpp
@@ -126,8 +127,42 @@ target_link_libraries(${PROJECT_NAME}10 PRIVATE
 )
 qt_finalize_executable(${PROJECT_NAME}10)
 
+
+
+add_executable(${PROJECT_NAME}11 09/main.cpp
+        09/ffmpegdecoder.cpp
+        09/ffmpegdecoder.h
+        09/I420render.cpp
+        09/I420render.h
+        09/VideoItem.cpp
+        09/VideoItem.h
+       )
+qt_add_resources(RESOURCES
+        09/qml.qrc
+)
+target_sources(${PROJECT_NAME}11 PRIVATE ${RESOURCES})
+
+
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}11 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}11 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}11 PRIVATE ${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}11 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        Qt::Qml
+        Qt::Quick
+        Qt::QuickControls2
+        ${FFMPEG_LIBRARIES}
+        swscale
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+)
+qt_finalize_executable(${PROJECT_NAME}11)
+
 if (MSVC)
-    add_custom_command(TARGET ${PROJECT_NAME}8 POST_BUILD
+    add_custom_command(TARGET ${PROJECT_NAME}11 POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E make_directory
             $<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms
 
