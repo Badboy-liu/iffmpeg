@@ -42,6 +42,6 @@ endif()
 
 - 2.要安装ffmpeg全部依赖,和qt的依赖
  ```c++
-    vcpkg install ffmpeg[all]
+    vcpkg install ffmpeg[nvcodec,opencl,vulkan,avcodec,avformat,swscale,swresample,avfilter,x264,x265,fdk-aac,mp3lame,gpl,fontconfig,freetype,fribidi]:x64-windows --recurse
     vcpkg install qtbase qtdeclarative qttools qtsvg qtimageformats  qtshadertools qtquickcontrols2 --triplet=x64-windows
  ```
