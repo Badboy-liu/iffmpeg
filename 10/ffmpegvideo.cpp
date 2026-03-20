@@ -9,7 +9,7 @@
 
 typedef struct DecodeContext
 {
-    AVBufferRef *hw_device_ctx;
+    AVBufferRef *hw_device_ctx = nullptr;
 }DecodeContext;
 
 
