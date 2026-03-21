@@ -10,6 +10,8 @@
 #include <QDebug>
 #include <QDir>
 
+#include "../constant.h"
+
 class VideoFboItem:public QQuickFramebufferObject::Renderer
 {
     public:
@@ -55,6 +57,7 @@ VideoItem::VideoItem(QQuickItem* parent): QQuickFramebufferObject(parent)
 {
     m_decoder = new FFmpegDecoder;
     connect(m_decoder,&FFmpegDecoder::newFrame,this,&VideoItem::update);
+    this->m_url = getPath();
 }
 VideoItem::~VideoItem()
 {
@@ -95,8 +98,15 @@ void VideoItem::stop()
 
 void VideoItem::setUrl(QString url)
 {
-    this->m_url=url;
-    m_decoder->setUrl(url);
+    if (url.isEmpty()) {
+        this->m_url = getPath();
+    }else {
+        this->m_url=url;
+    }
+
+    m_decoder->setUrl(this->m_url);
+
+
 }
 
 

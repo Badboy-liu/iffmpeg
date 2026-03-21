@@ -33,7 +33,7 @@
     <item row="0" column="0">
      <widget class="QLineEdit" name="lineUrl">
       <property name="text">
-       <string>E:\project\cpp\iqt\input.mp4</string>
+       <string></string>
       </property>
      </widget>
     </item>

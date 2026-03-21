@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QDir>
 
+#include "../constant.h"
+
 class VideoFboItem:public QQuickFramebufferObject::Renderer
 {
     public:
@@ -144,7 +146,12 @@ void VideoItem::stop()
 
 void VideoItem::setUrl(QString url)
 {
-    m_decoder->setUrl(url);
+
+    if (url.isEmpty()) {
+        m_decoder->setUrl(getPath());
+    }else {
+        m_decoder->setUrl(url);
+    }
 }
 
 void VideoItem::onVideoInfoReady(int width, int height)

@@ -8,47 +8,56 @@ message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
 message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
 add_executable(${PROJECT_NAME} main.cpp
         07/I420render2.cpp
-        07/I420render2.h)
+        07/I420render2.h
+        12/main.cpp
+        constant.h
+)
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARIES})
 #target_link_libraries(${PROJECT_NAME} PRIVATE avcodec-62.dll avdevice-62.dll avfilter-11.dll avformat-62.dll avutil-60.dll swresample-6.dll swscale-9.dll)
 
 
-add_executable(${PROJECT_NAME}2 01/main.cpp)
+add_executable(${PROJECT_NAME}2 01/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}2 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}2 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}2 PRIVATE ${FFMPEG_LIBRARIES})
 
 
-add_executable(${PROJECT_NAME}3 02/main.cpp)
+add_executable(${PROJECT_NAME}3 02/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}3 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}3 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}3 PRIVATE ${FFMPEG_LIBRARIES})
 
-add_executable(${PROJECT_NAME}4 03/main.cpp)
+add_executable(${PROJECT_NAME}4 03/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}4 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}4 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}4 PRIVATE ${FFMPEG_LIBRARIES})
 
 
-add_executable(${PROJECT_NAME}5 04/main.cpp)
+add_executable(${PROJECT_NAME}5 04/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}5 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}5 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}5 PRIVATE ${FFMPEG_LIBRARIES})
 
 
-add_executable(${PROJECT_NAME}6 05/main.cpp)
+add_executable(${PROJECT_NAME}6 05/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}6 PRIVATE ${FFMPEG_LIBRARIES})
 
-add_executable(${PROJECT_NAME}7 05/main2.cpp)
+add_executable(${PROJECT_NAME}7 05/main2.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}7 PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -66,7 +75,8 @@ find_package(Qt6 COMPONENTS
 add_executable(${PROJECT_NAME}8 06/main.cpp 06/mainwindow.cpp
         06/mainwindow.h
         06/ffmpegwidget.cpp
-        06/ffmpegwidget.h)
+        06/ffmpegwidget.h
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}8 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}8 PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -88,7 +98,8 @@ add_executable(${PROJECT_NAME}9 07/main.cpp 07/mainwindow.cpp
         07/I420render.cpp
         07/I420render.h
         07/I420render2.cpp
-        07/I420render2.h)
+        07/I420render2.h
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}9 PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -111,7 +122,8 @@ add_executable(${PROJECT_NAME}10 08/main.cpp 08/mainwindow.cpp
         08/I420render.cpp
         08/I420render.h
         08/I420render2.cpp
-        08/I420render2.h)
+        08/I420render2.h
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}10 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}10 PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -136,7 +148,8 @@ add_executable(${PROJECT_NAME}11 09/main.cpp
         09/I420render.h
         09/VideoItem.cpp
         09/VideoItem.h
-       )
+        constant.h
+)
 qt_add_resources(RESOURCES
         09/qml.qrc
 )
@@ -168,7 +181,7 @@ if (MSVC)
 
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
             "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
     )
 endif()
@@ -180,7 +193,8 @@ add_executable(${PROJECT_NAME}12 10/main.cpp
         10/MainWindow.cpp
         10/MainWindow.h
         10/ffmpegvideo.cpp
-        10/ffmpegvideo.h)
+        10/ffmpegvideo.h
+        constant.h)
 
 
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
@@ -209,7 +223,7 @@ if (MSVC)
 
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
             "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
     )
 endif()
@@ -222,7 +236,8 @@ add_executable(${PROJECT_NAME}13 11/main.cpp
         11/nv12render.cpp
         11/nv12render.h
         11/VideoItem.cpp
-        11/VideoItem.h)
+        11/VideoItem.h
+        constant.h)
 qt_add_resources(RESOURCES
         11/qml.qrc
 )
@@ -254,17 +269,32 @@ if (MSVC)
 
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
             "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
     )
 endif()
+
+
+add_executable(${PROJECT_NAME}14 12/main.cpp
+        constant.h)
+
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}14 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}14 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}14 PRIVATE ${FFMPEG_LIBRARIES})
+
+target_link_libraries(${PROJECT_NAME}14 PRIVATE
+        ${FFMPEG_LIBRARIES}
+        swscale
+)
 
 
 
 find_package(whisper CONFIG REQUIRED)
 
 
-add_executable(${PROJECT_NAME}100 100/main.cpp)
+add_executable(${PROJECT_NAME}100 100/main.cpp
+        constant.h)
 #target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
 target_include_directories(${PROJECT_NAME}100 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}100 PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -287,8 +317,8 @@ if (MSVC)
 
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}100>/platforms"
     )
 endif()
 target_link_libraries(${PROJECT_NAME}100 PRIVATE whisper)

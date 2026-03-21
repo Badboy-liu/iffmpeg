@@ -10,7 +10,11 @@
 3.vcpkg
 
 4.安装ffmpeg
-vcpkg install ffmpeg[all]
+
+5.qt6.8.3
+
+6.cmake
+
 
 
 
@@ -34,7 +38,7 @@ $<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms
             COMMAND ${CMAKE_COMMAND} -E copy
             #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
             "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
-            "$<TARGET_FILE_DIR:${PROJECT_NAME}8>/platforms"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}12>/platforms"
     )
 endif()
 ```
@@ -42,6 +46,6 @@ endif()
 
 - 2.要安装ffmpeg全部依赖,和qt的依赖
  ```c++
-    vcpkg install ffmpeg[nvcodec,opencl,vulkan,avcodec,avformat,swscale,swresample,avfilter,x264,x265,fdk-aac,mp3lame,gpl,fontconfig,freetype,fribidi]:x64-windows --recurse
+    vcpkg install ffmpeg[nvcodec,opencl,vulkan,avcodec,avformat,swscale,swresample,avfilter,x264,x265,fdk-aac,mp3lame,gpl,fontconfig,freetype,fribidi]:x64-windows 
     vcpkg install qtbase qtdeclarative qttools qtsvg qtimageformats  qtshadertools qtquickcontrols2 --triplet=x64-windows
  ```

@@ -4,6 +4,7 @@
 
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
+#include "../constant.h"
 
 MainWindow::MainWindow(QWidget* q_widget):QMainWindow(q_widget),ui(new Ui::MainWindow)
 {
@@ -15,6 +16,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_btnPs_clicked()
 {
+    ui->lineUrl->setText(getPath());
     QString url = ui->lineUrl->text().trimmed();
     if (url.isEmpty())
     {
