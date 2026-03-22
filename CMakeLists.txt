@@ -286,6 +286,7 @@ target_link_libraries(${PROJECT_NAME}14 PRIVATE ${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}14 PRIVATE
         ${FFMPEG_LIBRARIES}
         swscale
+        Qt::Core
 )
 
 
