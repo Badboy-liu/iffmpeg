@@ -409,3 +409,19 @@ target_link_libraries(${PROJECT_NAME}17 PRIVATE
         ${FFMPEG_LIBRARIES}
         swscale
 )
+
+
+add_executable(${PROJECT_NAME}18 16_audio_swr_pcm/main.cpp)
+target_include_directories(${PROJECT_NAME}18 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}18 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}18 PRIVATE ${FFMPEG_LIBRARIES})
+
+target_link_libraries(${PROJECT_NAME}18 PRIVATE
+        Qt::Core
+        ${FFMPEG_LIBRARIES}
+        swscale
+        swresample
+)
+
+
+
