@@ -53,3 +53,4 @@ endif()
 
 - 3.播放音频命令
   ffplay -f f32le -ar 44100 -ch_layout mono -i ../test.pcm
+  ![音频播放截图](./resources/img/audio_play.png)
