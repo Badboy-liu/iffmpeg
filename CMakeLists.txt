@@ -399,3 +399,13 @@ target_link_libraries(${PROJECT_NAME}100 PRIVATE whisper)
 #        "${CMAKE_SOURCE_DIR}/external/lib/swscale-9.dll"
 #        $<TARGET_FILE_DIR:${PROJECT_NAME}>
 #)
+add_executable(${PROJECT_NAME}17 15_audio_to_pcm/main.cpp)
+target_include_directories(${PROJECT_NAME}17 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}17 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}17 PRIVATE ${FFMPEG_LIBRARIES})
+
+target_link_libraries(${PROJECT_NAME}17 PRIVATE
+        Qt::Core
+        ${FFMPEG_LIBRARIES}
+        swscale
+)

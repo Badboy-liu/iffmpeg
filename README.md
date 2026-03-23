@@ -49,3 +49,7 @@ endif()
     vcpkg install ffmpeg[nvcodec,opencl,vulkan,avcodec,avformat,swscale,swresample,avfilter,x264,x265,fdk-aac,mp3lame,gpl,fontconfig,freetype,fribidi]:x64-windows 
     vcpkg install qtbase qtdeclarative qttools qtsvg qtimageformats  qtshadertools qtquickcontrols2 --triplet=x64-windows
  ```
+
+
+- 3.播放音频命令
+  ffplay -f f32le -ar 44100 -ch_layout mono -i ../test.pcm
