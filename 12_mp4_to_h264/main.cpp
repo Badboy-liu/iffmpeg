@@ -1,9 +1,12 @@
+
+
 #include "../constant.h"
 
 extern "C" {
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
 #include <libswscale/swscale.h>
+#include <libavutil/opt.h>
 }
 
 #include <iostream>
@@ -47,10 +50,29 @@ int main()
     enc_ctx->width  = dec_ctx->width;
     enc_ctx->height = dec_ctx->height;
     enc_ctx->pix_fmt = AV_PIX_FMT_YUV420P;
-    enc_ctx->time_base = AVRational{1, 25};
-    enc_ctx->framerate = AVRational{25,1};
+    AVStream* inStream = ifmt_ctx->streams[video_index];
 
-    avcodec_open2(enc_ctx, enc, nullptr);
+    AVRational fps = av_guess_frame_rate(ifmt_ctx, inStream, NULL);
+    if (fps.num == 0 || fps.den == 0) {
+        fps = AVRational{25,1};
+    }
+
+    enc_ctx->time_base = av_inv_q(fps);
+    enc_ctx->framerate = fps;
+    enc_ctx->gop_size = fps.num / fps.den;
+
+    enc_ctx->max_b_frames = 0;       // 先禁用 B 帧（你现在阶段很重要）
+    enc_ctx->bit_rate = 400000;      // 随便给个码率
+
+
+    // libx264 推荐
+    av_opt_set(enc_ctx->priv_data, "preset", "veryfast", 0);
+    av_opt_set(enc_ctx->priv_data, "tune", "zerolatency", 0);
+
+    if (avcodec_open2(enc_ctx, enc, nullptr) < 0) {
+        std::cout << "encoder open failed\n";
+        return -1;
+    }
 
     // ===== sws =====
     SwsContext* sws = sws_getContext(
@@ -69,7 +91,7 @@ int main()
     AVPacket* in_pkt  = av_packet_alloc();
     AVPacket* out_pkt = av_packet_alloc();
 
-    int pts = 0;
+    int64_t  pts = 0;
 
     // ===== 主循环 =====
     while (av_read_frame(ifmt_ctx, in_pkt) >= 0) {
@@ -89,7 +111,8 @@ int main()
                       yuv->data, yuv->linesize);
 
             yuv->pts = pts++;
-
+            // AVRational tb = {1, fps.num};
+            // yuv->pts = av_rescale_q(pts++, tb, enc_ctx->time_base);
             avcodec_send_frame(enc_ctx, yuv);
 
             while (avcodec_receive_packet(enc_ctx, out_pkt) == 0) {

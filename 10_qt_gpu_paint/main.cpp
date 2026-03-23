@@ -4,7 +4,7 @@
 
 #include<iostream>
 
-#include "../10/mainwindow.h"
+#include "../10_qt_gpu_paint/mainwindow.h"
 using namespace std;
 #include <QApplication>
 
