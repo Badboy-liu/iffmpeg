@@ -330,6 +330,23 @@ endif()
 
 
 
+add_executable(${PROJECT_NAME}16 14_camera_to_h264/main.cpp
+        constant.h)
+
+
+#target_link_libraries(${PROJECT_NAME} PRIVATE PNG::PNG)
+target_include_directories(${PROJECT_NAME}16 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}16 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}16 PRIVATE ${FFMPEG_LIBRARIES})
+
+target_link_libraries(${PROJECT_NAME}16 PRIVATE
+        Qt::Core
+        ${FFMPEG_LIBRARIES}
+        swscale
+)
+
+
+
 find_package(whisper CONFIG REQUIRED)
 
 
