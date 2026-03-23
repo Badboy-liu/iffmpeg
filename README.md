@@ -52,6 +52,6 @@ endif()
 
 
 - 3.播放音频命令
-  15 文件夹 ffplay -f f32le -ar 44100 -ch_layout mono -i ./test.pcm
-  16 文件夹  ffplay -f s16le -ar 44100 -ch_layout mono -i ./test.pcm
+  - 15 文件夹 ffplay -f f32le -ar 44100 -ch_layout mono -i ./test.pcm
+  - 16 文件夹  ffplay -f s16le -ar 44100 -ch_layout mono -i ./test.pcm
   ![音频播放截图](./resources/img/audio_play.png)
