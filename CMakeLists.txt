@@ -64,7 +64,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 COMPONENTS
         Core Widgets Gui    OpenGL Qml  Quick
         QuickControls2
-        OpenGLWidgets OpenGL
+        OpenGLWidgets OpenGL Multimedia
         REQUIRED)
 
 add_executable(${PROJECT_NAME}8 06_qt_paint/main.cpp 06_qt_paint/mainwindow.cpp
@@ -421,6 +421,29 @@ target_link_libraries(${PROJECT_NAME}18 PRIVATE
         ${FFMPEG_LIBRARIES}
         swscale
         swresample
+)
+
+add_executable(${PROJECT_NAME}19 17_mp3_pcm_to_qt/main.cpp)
+target_include_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARIES})
+
+message(WARNING "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}19 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+        Qt6::Multimedia
+
+        avformat
+        avcodec
+        avutil
+        swresample
+        swscale
+
+        ${FFMPEG_LIBRARIES}
 )
 
 
