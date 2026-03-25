@@ -3,6 +3,7 @@ project(iffmpeg)
 
 set(CMAKE_CXX_STANDARD 20)
 find_package(FFMPEG   REQUIRED)
+
 #find_package(PNG REQUIRED)
 message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
 message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
@@ -64,7 +65,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt6 COMPONENTS
         Core Widgets Gui    OpenGL Qml  Quick
         QuickControls2
-        OpenGLWidgets OpenGL Multimedia
+        OpenGLWidgets OpenGL Multimedia test
         REQUIRED)
 
 add_executable(${PROJECT_NAME}8 06_qt_paint/main.cpp 06_qt_paint/mainwindow.cpp
@@ -428,7 +429,7 @@ target_include_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(WARNING "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}19 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -451,7 +452,7 @@ target_include_directories(${PROJECT_NAME}20 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}20 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}20 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(WARNING "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}20 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -469,4 +470,50 @@ target_link_libraries(${PROJECT_NAME}20 PRIVATE
 
 
 
+add_executable(${PROJECT_NAME}21 19_audio_video_sync/main.cpp
+        19_audio_video_sync/mainwindow.cpp
+        19_audio_video_sync/mainwindow.h
+        19_audio_video_sync/ffmpegwidget.cpp
+        19_audio_video_sync/ffmpegwidget.h
+        19_audio_video_sync/player.cpp
+        19_audio_video_sync/player.h
 
+        19_audio_video_sync/demuxthread.cpp
+        19_audio_video_sync/demuxthread.h
+        19_audio_video_sync/FFmpegVideo.cpp
+        19_audio_video_sync/FFmpegVideo.h
+        19_audio_video_sync/FFmpegAudio.cpp
+        19_audio_video_sync/FFmpegAudio.h
+)
+target_include_directories(${PROJECT_NAME}21 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}21 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}21 PRIVATE ${FFMPEG_LIBRARIES})
+
+message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}21 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+        Qt::Multimedia
+        Qt::Test
+
+        avformat
+        avcodec
+        avutil
+        swresample
+        swscale
+)
+
+if (MSVC)
+    add_custom_command(TARGET ${PROJECT_NAME}21 POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory
+            $<TARGET_FILE_DIR:${PROJECT_NAME}21>/platforms
+
+            COMMAND ${CMAKE_COMMAND} -E copy
+            #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}21>/platforms"
+    )
+endif()

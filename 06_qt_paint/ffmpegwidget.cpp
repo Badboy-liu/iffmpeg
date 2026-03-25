@@ -1,4 +1,4 @@
-#include "ffmpegwidget.h"
+#include "../06_qt_paint/ffmpegwidget.h"
 
 FFmpegVideo::FFmpegVideo()
 {
