@@ -517,3 +517,49 @@ if (MSVC)
             "$<TARGET_FILE_DIR:${PROJECT_NAME}21>/platforms"
     )
 endif()
+
+
+
+
+add_executable(${PROJECT_NAME}22 20_add_filter/main.cpp
+
+        20_add_filter/mainwindow.cpp
+        20_add_filter/mainwindow.h
+        20_add_filter/ffmpegwidget.cpp
+        20_add_filter/ffmpegwidget.h
+)
+target_include_directories(${PROJECT_NAME}22 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}22 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}22 PRIVATE ${FFMPEG_LIBRARIES})
+
+message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}22 PRIVATE
+        Qt::Core
+        Qt::Widgets
+        Qt::Gui
+        Qt::OpenGL
+        Qt::OpenGLWidgets
+        Qt::Multimedia
+        Qt::Test
+
+        avformat
+        avcodec
+        avutil
+        swresample
+        swscale
+)
+
+if (MSVC)
+    add_custom_command(TARGET ${PROJECT_NAME}22 POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory
+            $<TARGET_FILE_DIR:${PROJECT_NAME}22>/platforms
+
+            COMMAND ${CMAKE_COMMAND} -E copy
+            #            "${_VCPKG_INSTALLED_DIR}/x64-windows/tools/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "${_VCPKG_INSTALLED_DIR}/x64-windows/$<$<CONFIG:Debug>:debug/>/Qt6/plugins/platforms/qwindows$<$<CONFIG:Debug>:d>.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}22>/platforms"
+    )
+endif()
+
+
+
