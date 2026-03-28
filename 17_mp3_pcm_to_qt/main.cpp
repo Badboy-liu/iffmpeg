@@ -29,7 +29,7 @@ using namespace std;
 #define MAX_AUDIO_FRAME_SIZE 192000
 
 int main(int argc,char* arg[]){
-    QString url  = "../input.mp4";
+    QString url  = "../resources/input/input.mp4";
     QCoreApplication a(argc, arg);
     QAudioOutput *audioOutput;
 

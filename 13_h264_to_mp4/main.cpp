@@ -22,7 +22,7 @@ int main(int argc,char* arg[]){
     int frame_index = 0;
 
     int inVStreamIndex = -1,outVStreamIndex = -1;
-    const char* inVFileName = "../result.h264";
+    const char* inVFileName = "../resources/input/result.h264";
     const char* outFileName = "result.mp4";
 
     AVFormatContext *inFormatCtx = nullptr,*outFormatCtx = nullptr;

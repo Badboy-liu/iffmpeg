@@ -15,7 +15,7 @@ extern "C"{
 
 
 int main(int argc, char *argv[]) {
-    const char infile[] = "../input.mp4";
+    const char infile[] = "../resources/input/input.mp4";
     const char outfile[] = "test.pcm";
     FILE *file = fopen(outfile, "w+b");
     if (file == nullptr) {

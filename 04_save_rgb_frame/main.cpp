@@ -25,7 +25,7 @@ extern "C"{
 void saveFrame(AVFrame *frame,int width,int height,int iFrame);
 
 int main(int argc,char* arg[]){
-    char file[] = "..\\input.mp4";
+    char file[] = "../resources/input/input.mp4";
     int video_stream_index = 0;
     int ret = 0;
 

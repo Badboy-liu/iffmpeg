@@ -12,7 +12,7 @@ extern "C" {
 
 
 int main(int argc,char* arg[]){
-    const char* file = "..\\input.mp4";
+    const char* file = "../resources/input/input.mp4";
     int ret = 0;
     int videoStreamIndex = -1;
 

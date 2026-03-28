@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    const char*inFileName="../test.pcm";
+    const char*inFileName="../resources/input/test.pcm";
     const char*outFileName="output.mp3";
 
     FILE *inFile = fopen(inFileName, "rb");

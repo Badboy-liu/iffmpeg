@@ -19,7 +19,7 @@ int main(int argc,char* arg[]){
         return -1;
     }
 
-    const char* file = "..\\input.mp4";
+    const char* file = "../resources/input/input.mp4";
     int ret = 0;
     do
     {

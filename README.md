@@ -19,7 +19,7 @@
 
 
 yuv播放器
-在software文件夹下的[yuvplayer-2.5.zip](software/yuvplayer-2.5.zip)
+在software文件夹下的[yuvplayer-2.5.zip](resources/software/yuvplayer-2.5.zip)
 打开软件修改size为592*1280
 
 

@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
     int videoIndex = -1, audioIndex = -1;
     int ret = 0;
 
-    char inFilename[128] = "../input.mp4";
+    char inFilename[128] = "../resources/input/input.mp4";
     char outFilenameAudio[128] = "output.aac";
     char outFilenameVideo[128] = "output.h265";
 

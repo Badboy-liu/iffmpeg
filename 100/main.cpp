@@ -147,7 +147,7 @@ int main(int argc, char* argv[])
 {
     std::vector<float> pcm;
 
-    decode_audio("../100/input.mp4",pcm);
+    decode_audio("../resources/input/input.mp4",pcm);
     for(int i=0;i<20;i++)
     {
         std::cout<<pcm[i]<<" ";

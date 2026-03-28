@@ -18,7 +18,7 @@ int main(int argc,char* arg[]){
         std::cout<<"Error opening file"<<std::endl;
         return -1;
     }
-    char file_path[] = "..\\input.mp4";
+    char file_path[] = "../resources/input/input.mp4";
     int video_stream_index = 0;
     int ret = 0;
 

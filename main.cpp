@@ -566,7 +566,7 @@ int extract_video(std::string  input_path,std::string output_dir){
 }
 
 int main(int argc, char* argv[]) {
-    std::string input_path =  "..\\input.mp4";
+    std::string input_path =  "../resources/input/input.mp4";
     std::string output_dir = "..\\output";
 
 //    extract_video(input_path,output_dir);
