@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(FFMPEG   REQUIRED)
 
 #find_package(PNG REQUIRED)
-message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
-message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
+#message(STATUS "FFMPEG_LIBRARIES = ${FFMPEG_LIBRARIES}")
+#message(STATUS "FFMPEG_INCLUDE_DIRS = ${FFMPEG_INCLUDE_DIRS}")
 add_executable(${PROJECT_NAME} main.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARY_DIRS})
@@ -429,7 +429,7 @@ target_include_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}19 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}19 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -452,7 +452,7 @@ target_include_directories(${PROJECT_NAME}20 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}20 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}20 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}20 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -489,7 +489,7 @@ target_include_directories(${PROJECT_NAME}21 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}21 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}21 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}21 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -532,7 +532,7 @@ target_include_directories(${PROJECT_NAME}22 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}22 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}22 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}22 PRIVATE
         Qt::Core
         Qt::Widgets
@@ -568,8 +568,22 @@ target_include_directories(${PROJECT_NAME}23 PRIVATE ${FFMPEG_INCLUDE_DIRS})
 target_link_directories(${PROJECT_NAME}23 PRIVATE ${FFMPEG_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME}23 PRIVATE ${FFMPEG_LIBRARIES})
 
-message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
 target_link_libraries(${PROJECT_NAME}23 PRIVATE
+        avformat
+        avcodec
+        avutil
+        swresample
+        swscale)
+
+
+add_executable(${PROJECT_NAME}24 22_mp4_to_yuv_pcm/main.cpp)
+target_include_directories(${PROJECT_NAME}24 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}24 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}24 PRIVATE ${FFMPEG_LIBRARIES})
+
+#message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}24 PRIVATE
         avformat
         avcodec
         avutil
