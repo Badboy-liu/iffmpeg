@@ -563,3 +563,20 @@ endif()
 
 
 
+add_executable(${PROJECT_NAME}23 21_mp4_to_h264_mp3/main.cpp)
+target_include_directories(${PROJECT_NAME}23 PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_directories(${PROJECT_NAME}23 PRIVATE ${FFMPEG_LIBRARY_DIRS})
+target_link_libraries(${PROJECT_NAME}23 PRIVATE ${FFMPEG_LIBRARIES})
+
+message(STATUS "FFMPEG_LIBRARIES = "${FFMPEG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}23 PRIVATE
+        avformat
+        avcodec
+        avutil
+        swresample
+        swscale)
+
+
+
+
+
